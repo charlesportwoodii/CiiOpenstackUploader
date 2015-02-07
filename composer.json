@@ -11,8 +11,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/charlesportwoodii/CiiRackspaceUploader/issues",
-        "source": "https://github.com/charlesportwoodii/CiiRackspaceUploader"
+        "issues": "https://github.com/charlesportwoodii/CiiOpenstackUploader/issues",
+        "source": "https://github.com/charlesportwoodii/CiiOpenstackUploader"
     },
     "repositories": [
         {
