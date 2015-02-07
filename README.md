@@ -7,7 +7,7 @@ This class enables CiiMS to upload files to Rackspace Cloud Files, or any OpenSt
 This class should be installed with composer. After installing/uploading CiiMS, run this class
 
 ```
-# composer require ciims-plugins/awsuploader dev-master # DEV
+# composer require ciims-plugins/rackspaceuploader dev-master # DEV
 composer require ciims-plugins/rackspaceuploader 1.0.0 # Versioned
 ```
 
