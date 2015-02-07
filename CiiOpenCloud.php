@@ -33,17 +33,6 @@ class CiiOpenCloud extends CComponent
 	// Control file for certain overrides
 	private $_overrideControl = array();
 
-	// A list of valid extensions
-	public $allowedExtensions = array(
-        'png',
-        'jpeg',
-        'jpg',
-        'gif',
-        'bmp'
-    );
-
-    protected $_file = false;
-
 	/**
 	 * Constructor for CiiOpenCloud Utility Helper
 	 * @param string  $username     Openstack Username
@@ -116,10 +105,6 @@ class CiiOpenCloud extends CComponent
 
         $this->_container = $this->getService()->getContainer($name);
 
-        // Enforce the quote if one is defined in our override control
-        if (($container_max_size = Cii::get($this->_overrideControl, 'max_container_size', 0)) != 0)
-        	$this->_container->setBytesQuota($container_max_size);
-
         return $this->_container;
 	}
 
@@ -136,13 +121,13 @@ class CiiOpenCloud extends CComponent
         $fullFileName = $filename.'.'.$file->getExtension();
 
 		$factory = new CryptLib\Random\Factory;
-		$file = preg_replace('/[^\da-z]/i', '', $factory->getLowStrengthGenerator()->generateString(32));
-		$cdnFilename = $file.'.'.$file->getExtension();
+		$fileZ = preg_replace('/[^\da-z]/i', '', $factory->getLowStrengthGenerator()->generateString(32));
+		$cdnFilename = $fileZ.'.'.$file->getExtension();
 
         try {
-        	$response = $this->_container->uploadObject($cdnFilename, $data, array());
+        	$response = $this->_container->uploadObject($cdnFilename, file_get_contents($file->tmp_name), array());
         	if ($response)
-	        	 return array('success' => true,'filename'=> $cdnFilename, 'url' => $this->_container->getCDN()->getMetadata()->getProperty('Ssl-Uri'));
+	        	 return array('success' => true,'filename'=> $cdnFilename, 'url' => $this->_container->getCDN()->getMetadata()->getProperty('Ssl-Uri') . '/'. $cdnFilename);
 	        else
 	        	return array('error'=> Yii::t('ciims.misc', 'Could not save uploaded file. The upload was cancelled, or server error encountered'));
         } catch (Exception $e) {
