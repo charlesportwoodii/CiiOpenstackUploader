@@ -1,5 +1,5 @@
 {
-    "name": "ciims-plugins/ciirackspaceuploader",
+    "name": "ciims-plugins/rackspaceuploader",
     "description": "A CiiMS plugin to upload files to Rackspace Cloud files CDN",
     "license": "MIT",
     "authors": [
